@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header>
+        <a id="nav-toggle" href="#"><span></span></a>
+        <nav>
+            <ul>
+                <img src="images/logo.png" class="logo">
+                <li><a class="active" href="#">Home</a></li>
+                <li><a href="{{ path('offer_create') }}">Créer une nouvelle annonce</a></li>
+                <li><a href="{{ path('search_offer') }}">Rechercher une offre</a></li>
+            </ul>
+        </nav>
+        <div class="intro">
+            <h1>Adopt a Friend</h1>
+            <h2>Retrouvez les <span class="text-blue">meilleurs annonces</span> pour trouver votre nouveau meilleur ami</h2>
+            <input type="text" placeholder="Recherchez une fiche ou un professionel">
+            <a href="#contact" class='big-button'>Voir les annonces</a>
+        </div>
+    </header>
+
+{% endblock %}
