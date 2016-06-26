@@ -17,28 +17,44 @@ use Doctrine\ORM\EntityRepository;
  */
 class OfferRepository extends EntityRepository
 {
-      /**
-       * @param array $filter
-       * @return mixed
-       */
-      public function findFilteredActive($filter = [])
-      {
-            $qb = $this->createQueryBuilder('o');
-            $qb->where('o.status = :status');
-            $qb->setParameter('status', Offer::STATUS_ACTIVE);
+    /**
+     * @param array $filter
+     * @return mixed
+     */
+    public function findFilteredActive($filter = [])
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb->where('o.status = :status');
+        $qb->setParameter('status', Offer::STATUS_ACTIVE);
 
-            if (isset($filter['title'])) {
-                  $qb->where('o.title like *:title*');
-                  $qb->setParameter('title', $filter['title']);
-            }
+        if (isset($filter['title'])) {
+              $qb->where('o.title like *:title*');
+              $qb->setParameter('title', $filter['title']);
+        }
 
-            if (isset($filter['departement'])) {
-                  $qb->where('o.departement like *:departement*');
-                  $qb->setParameter('departement', $filter['departement']);
-            }
+        if (isset($filter['departement'])) {
+              $qb->where('o.departement like *:departement*');
+              $qb->setParameter('departement', $filter['departement']);
+        }
 
-            $qb->orderBy('o.created');
+        $qb->orderBy('o.created');
 
-            return $qb->getQuery()->execute();
-      }
+        return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findNewestActive()
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb->where('o.status = :status');
+        $qb->setParameter('status', Offer::STATUS_ACTIVE);
+        $qb->orderBy('o.created');
+
+        $qb->setMaxResults(6);
+
+        return $qb->getQuery()->execute();
+
+    }
 }

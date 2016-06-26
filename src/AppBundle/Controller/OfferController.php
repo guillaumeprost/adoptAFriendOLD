@@ -59,9 +59,12 @@ class OfferController extends BaseController
             if ($this->offerForm->isSubmitted() && $this->offerForm->isValid()) {
                   $offer->setSlug($offer->getTitle());
                   $offer->setCreated(new \DateTime());
+                  $offer->setUpdated(new \DateTime());
 
                   $this->getEntityManager()->persist($offer);
                   $this->getEntityManager()->flush($offer);
+
+                  return $this->redirectToRoute('offer_show',['slug' => $offer->getSlug()]);
             }
             
             return $this->render(':offer:create.html.twig', [

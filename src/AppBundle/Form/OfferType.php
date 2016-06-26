@@ -51,7 +51,7 @@ class OfferType extends AbstractType
                         'label'    => 'Quel animal ?',
                         'required' => true,
                         'choices'  => [
-                              Offer::ANIMAL_TYPE_DOG => 'Dog'
+                              Offer::ANIMAL_TYPE_DOG => 'Chien'
                         ]
                   ]);
       }
