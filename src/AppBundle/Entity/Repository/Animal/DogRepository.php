@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity\Repository\Animal;
 
+use AppBundle\Form\Model\Search\AnimalModel;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -16,5 +17,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class DogRepository extends EntityRepository
 {
+    /**
+     * @param AnimalModel $model
+     * @return Dog[]
+     */
+    public function findByAnimalModel(AnimalModel $model){
+        $qb = $this->createQueryBuilder('d');
 
+        if(null !== $model->getName()) {
+            $qb->andWhere($qb->expr()->like('LOWER(d.name)', ':name'));
+            $qb->setParameter('name', '%'.strtolower($model->getName()).'%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

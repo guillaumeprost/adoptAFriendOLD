@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'id': 'search-offer-form'}}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Rechercher", class="btn btn-default pull-right">
+    {{ form_end(form) }}
+
+    {% for offer in offers %}
+        {% include ':includes:offer-case.html.twig' %}
+    {% endfor %}
+{% endblock body %}

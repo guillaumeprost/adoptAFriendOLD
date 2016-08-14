@@ -31,6 +31,10 @@ abstract class Animal
       const STATUS_ACTIVE   = 'active';
       const STATUS_DELETED  = 'deleted';
 
+    const DISCRIMINATORS = [
+        'Chien' => 'dog'
+    ];
+
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)

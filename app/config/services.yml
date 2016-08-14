@@ -9,3 +9,9 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.bot:
       class: AppBundle\Utils\Bot
+
+    #FORM type
+    app.form.search:
+        class: AppBundle\Form\Type\SearchType
+        tags:
+            - { name: form.type }

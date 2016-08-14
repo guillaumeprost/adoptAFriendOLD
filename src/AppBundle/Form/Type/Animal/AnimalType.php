@@ -6,7 +6,7 @@
  * Time: 12:07
  */
 
-namespace AppBundle\Form\Animal;
+namespace AppBundle\Form\Type\Animal;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

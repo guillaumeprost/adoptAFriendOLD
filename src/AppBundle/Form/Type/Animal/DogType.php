@@ -6,9 +6,12 @@
  * Time: 12:25
  */
 
-namespace AppBundle\Form\Animal;
+namespace AppBundle\Form\Type\Animal;
 
 class DogType extends AnimalType
 {
-
+    public function getBlockPrefix()
+    {
+        return 'dog';
+    }
 }

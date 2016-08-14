@@ -15,6 +15,6 @@ namespace AppBundle\Constants;
 class Dog
 {
     const DOG_BREEBS = [
-        ''
+        'Labrador' => 'Labrador'
     ];
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'id': 'search-animal-form'}}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Rechercher", class="btn btn-default pull-right">
+    {{ form_end(form) }}
+
+    {#TODO : list animals#}
+    {#{% for animal in animals %}#}
+        {#{% include ':includes:offer-case.html.twig' with {offer: animal.offer} %}#}
+    {#{% endfor %}#}
+{% endblock body %}

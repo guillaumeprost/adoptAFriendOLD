@@ -26,9 +26,12 @@ class HomeController extends BaseController
     {
         $newestOffer = $this->getRepository('AppBundle:Offer')->findNewestActive();
 
+        $mostViewedOffers = $this->getRepository('AppBundle:Offer')->findMostViewedActive();
+
         // replace this example code with whatever you need
         return $this->render('home/index.html.twig', [
-            'newestOffers' => $newestOffer
+            'newestOffers'     => $newestOffer,
+            'mostViewedOffers' => $mostViewedOffers
         ]);
     }
 }

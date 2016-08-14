@@ -28,6 +28,7 @@ class Offer
       use EntityTraits\StatusTrait;
       use EntityTraits\SlugTrait;
       use EntityTraits\TimestampableTrait;
+      use EntityTraits\ViewTrait;
 
       const STATUS_DISABLED = 'disabled';
       const STATUS_ACTIVE   = 'active';

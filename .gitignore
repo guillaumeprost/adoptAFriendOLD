@@ -16,3 +16,4 @@
 /web/bundles/
 .idea/*
 composer.lock
+/src/AppBundle/Form/Type/OfferType.php

@@ -1,0 +1,17 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{%- block _offer_animals_entry_widget -%}
+    {% dump('enfin') %}
+    {% spaceless %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    {{ form_label(form.name)}}
+                </div>
+                <div class="col-md-10">
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{%- endblock  _offer_animals_entry_widget -%}

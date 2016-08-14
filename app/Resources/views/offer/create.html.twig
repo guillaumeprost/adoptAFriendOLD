@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form ':form:fields.html.twig' %}
+
 {% block body %}
     <div class="raw">
         <div class="col-md-12">
@@ -52,6 +54,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <h3>Animaux</h3>
+                    <ul class="tags" data-prototype="{{ form_widget(form.animals.vars.prototype)|e('html_attr') }}">
+                        {# iterate over each existing tag and render its only field: name #}
+                        {% for animal in form.animals %}
+                            <li>{{ form_row(animal.name) }}</li>
+                        {% endfor %}
+                    </ul>
                     <div class="form-group">
                         <input type="submit" value="Créer" class="btn-lg btn-default btn-success pull-right" />
                     </div>
