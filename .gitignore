@@ -17,3 +17,9 @@
 .idea/*
 composer.lock
 /src/AppBundle/Form/Type/OfferType.php
+/npm-debug.log
+npm-debug.log
+/web/assets/vendor/
+bower.json
+web/.bowerrc
+web/assets/

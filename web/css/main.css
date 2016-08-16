@@ -9,7 +9,8 @@ body{
 }
 
 #hero{
-    background-image:url(https://chrisaam.files.wordpress.com/2015/03/wallpaper-2846361.jpg);
+    background-image:url("../img/wallpaper.jpg");
+    /*background-image:url(https://chrisaam.files.wordpress.com/2015/03/wallpaper-2846361.jpg);*/
     background-size:cover;
     position:relative;
     height:100vh;
@@ -32,7 +33,7 @@ body{
 }
 
 #hero-basic{
-    background-image:url(https://chrisaam.files.wordpress.com/2015/03/wallpaper-2846361.jpg);
+    background-image:url("../img/wallpaper.jpg");
     background-size:cover;
     position:relative;
     height:15vh;

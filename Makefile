@@ -4,3 +4,6 @@ hello:
 init:
 	php bin/console server:run
 	mysql.server restart
+
+bower-install:
+    bower install
