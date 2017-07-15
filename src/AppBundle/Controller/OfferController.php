@@ -8,12 +8,13 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Animal\Animal;
+use AppBundle\Entity\Animal\Dog;
 use AppBundle\Entity\Offer;
 use AppBundle\Form\Type\Animal\DogType;
 use AppBundle\Form\Type\OfferType;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,11 +27,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class OfferController extends BaseController
 {
-    /**
-     * @var OfferType
-     */
-    private $offerForm;
-
     /**
      * @param Offer $offer
      * @return \Symfony\Component\HttpFoundation\Response
@@ -54,12 +50,40 @@ class OfferController extends BaseController
      */
     public function createAction(Request $request)
     {
+//        $offer = new Offer();
+//        $offerForm = $this->createForm(OfferType::class, $offer);
+//
+//        $offerForm->handleRequest($request);
+//        if ($offerForm->isSubmitted() && $offerForm->isValid()) {
+//            $offer->setSlug($offer->getTitle());
+//            $offer->setCreated(new \DateTime());
+//            $offer->setUpdated(new \DateTime());
+//
+//            $this->getEntityManager()->persist($offer);
+//            $this->getEntityManager()->flush($offer);
+//
+//            return $this->redirectToRoute('offer_show', ['slug' => $offer->getSlug()]);
+//        }
+
+        return $this->render(':offer:create.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/render-form/{type}", name="offer_render_form")
+     *
+     * @param Request $request
+     * @param $type
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function renderFormAction(Request $request, $type)
+    {
         $offer = new Offer();
-        $this->offerForm = $this->createForm(OfferType::class, $offer);
+        $offerForm = $this->createForm(OfferType::class, $offer);
+        $this->manageAnimalType($offerForm, $type);
+        $offerForm->handleRequest($request);
 
-        $this->offerForm->handleRequest($request);
-
-        if ($this->offerForm->isSubmitted() && $this->offerForm->isValid()) {
+        if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offer->setSlug($offer->getTitle());
             $offer->setCreated(new \DateTime());
             $offer->setUpdated(new \DateTime());
@@ -71,8 +95,28 @@ class OfferController extends BaseController
         }
 
         return $this->render(':offer:create.html.twig', [
-            'form' => $this->offerForm->createView()
+            'form' => $offerForm->createView()
         ]);
+    }
+
+    /**
+     * @param Form $form
+     * @param $type
+     * @return Form
+     */
+    public function manageAnimalType(Form $form, $type)
+    {
+        switch ($type){
+            case $type == Dog::DISCIMINATOR :
+                $form->add('animals', CollectionType::class, [
+                    'entry_type' => DogType::class,
+                    'allow_add' => true,
+                    'prototype' => true,
+                ]);
+                break;
+        }
+
+        return $form;
     }
 
     /**
@@ -87,17 +131,17 @@ class OfferController extends BaseController
                     $this->offerForm->add('tags', CollectionType::class, [
                         'entry_type' => DogType::class
                     ]);
-                    break;
-
                     return new JsonResponse([
                         'success' => true,
                         'message' => 'Dog type added'
                     ]);
+                    break;
                 default:
                     return new JsonResponse([
                         'success' => false,
                         'message' => 'Wrong animal type provided'
                     ]);
+                    break;
             }
         } catch (Exception $e) {
             return new JsonResponse([
